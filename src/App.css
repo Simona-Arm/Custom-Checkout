@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+.header{
+    width: 100%;
+    /* margin: auto; */
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+display: flex;
+    margin-top: 24px;
+
+}
+main{
+    display: flex;
+    justify-content: center;
+}
+.header > div {
+    /* margin: auto; */
+    justify-content: center;
+
+    align-items: center;
+    height: 80px;
+    display: flex;
+    border-bottom: 1px solid #e2e2e2 !important;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header > div > svg {
+    height: 100%;
+    width: 60px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ais-SearchBox-input{
+  border-radius: unset !important;
+    padding-left: 10px !important;
+}
+.ais-SearchBox-form::before{
+display: none !important;
+ }
+.ais-SearchBox{
+    border: none !important;
+    /*border-bottom: 1px solid #e2e2e2 !important;*/
+    box-shadow: unset !important;
+    height: 100% !important;
+}
+.ais-SearchBox-form{
+    height: 100% !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ais-SearchBox-input{
+    border: none !important;
+    /*border-bottom: 1px solid #e2e2e2 !important;*/
+    box-shadow: unset !important;
+    font-size: 62px !important;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 62.3px;
+    text-transform: capitalize;
+    height: 100% !important;
 }

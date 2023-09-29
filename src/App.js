@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {InstantSearch, SearchBox, useHits} from "react-instantsearch";
+
+import {TYPESENSE_SERVER_CONFIG, typesenseInstantsearchAdapter} from "./scripts/typesenseadapter.js";
+import {ReactComponent as SearchIcon} from './assets/icons/searchIcon.svg';
+import {useEffect, useState} from "react";
+import {Hits} from "react-instantsearch";
+import Hit from "./components/Hit";
+
+async function performSearch(query,setResults,searchClient) {
+
+    if (query.trim() === '') {
+        setResults([]);
+        return;
+    }
+    try {
+        const searchResults = await searchClient.searchClient.search('name', {
+            q: query,
+        });
+        setResults(searchResults.hits || []);
+    } catch (error) {
+        console.error('Typesense search error:', error);
+        setResults([]);
+    }
+}
+
+
 
 function App() {
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InstantSearch searchClient={typesenseInstantsearchAdapter.searchClient} indexName="products">
+          <header className="header">
+              <div>
+                  <SearchIcon />
+                  <SearchBox
+                      className="ais-SearchBox"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                  />
+              </div>
+
+          </header>
+          <main>
+              <Hit/>
+          </main>
+      </InstantSearch>
     </div>
   );
 }

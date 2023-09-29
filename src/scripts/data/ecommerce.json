@@ -1,0 +1,41 @@
+[
+    {
+      "name": "weBoost - Home 4G Cellular Signal Booster - Black\/Gray\/White",
+      "description": "Ensure a strong 4G or 4G LTE signal throughout your home with this weBoost Home 470101 cellular signal booster, which helps prevent dropped calls and lost connections in up to 2 rooms. Simple installation lets you begin enhancing signals right away.",
+      "brand": "weBoost",
+      "categories": [
+        "Cell Phones",
+        "Cell Phone Accessories",
+        "Signal Boosters"
+      ],
+      "price": 399.99,
+      "image": "https:\/\/cdn-demo.algolia.com\/bestbuy-0118\/3247056_rb.jpg",
+      "popularity": 7011
+    },
+  {
+    "name": "OtterBox - Alpha Glass Series Screen Protector for Apple iPhone 7 Plus - Clear",
+    "description": "Pixel perfect iPhone 7 Plus glass screen protector resists scratches and shattering while maintaining touch sensitivity and display clarity.",
+    "brand": "OtterBox",
+    "categories": [
+      "Cell Phones",
+      "Cell Phone Accessories",
+      "Screen Protectors"
+    ],
+    "price": 39.95,
+    "image": "https:\/\/cdn-demo.algolia.com\/bestbuy-0118\/5632831_rb.jpg",
+    "popularity": 4
+  },
+  {
+    "name": "zNitro - Screen Protector for Samsung Galaxy S III - White",
+    "description": "Keep the screen on your Samsung Galaxy S III intact with this Nitro screen protector. Hammer Tested tempered glass distributes shock across the surface of the protector so that your phone's screen remains unharmed. This clear Nitro screen protector is scratch-resistant and protects against scrapes from sharp or pointed objects such as keys and pens.",
+    "brand": "zNitro",
+    "categories": [
+      "Cell Phones",
+      "Cell Phone Accessories",
+      "Screen Protectors"
+    ],
+    "price": 29.99,
+    "image": "https:\/\/cdn-demo.algolia.com\/bestbuy-0118\/5220810_rb.jpg",
+    "popularity": 3
+  }
+  ]

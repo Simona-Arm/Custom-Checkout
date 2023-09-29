@@ -9,13 +9,23 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "algoliasearch": "^4.20.0",
+    "instantsearch.css": "^8.1.0",
+    "dotenv": "^16.3.1",
+    "react-instantsearch": "^7.1.0",
+    "react-instantsearch-core": "^7.1.0",
+    "react-instantsearch-dom": "^6.40.4",
+    "typesense": "^1.7.1",
+    "typesense-instantsearch-adapter": "^2.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "indexer": "node src/scripts/populateTypesenseIndex.js",
+    "typesenseServer": "docker run -i -p 433:433 -v`pwd`/typesense-server-data/:/data typesense/typesense:0.25.1 --data-dir /data --api-key=VfjYbDVVhpcsSoeYl2WxLL8CGqOiMPe8 --listen-port 433 --enable-cors"
   },
   "eslintConfig": {
     "extends": [
