@@ -17,81 +17,67 @@ module.exports = (async () => {
     ]
   });
 
-  const schema = {
-    name: "products",
-    num_documents: 0,
-    fields: [
-      {
-        name: "name",
-        type: "string",
-        facet: false
-      },
-      {
-        name: "description",
-        type: "string",
-        facet: false
-      },
-      {
-        name: "brand",
-        type: "string",
-        facet: true
-      },
-      {
-        name: "categories",
-        type: "string[]",
-        facet: true
-      },
-      {
-        name: "categories.lvl0",
-        type: "string[]",
-        facet: true
-      },
-      {
-        name: "categories.lvl1",
-        type: "string[]",
-        facet: true,
-        optional: true
-      },
-      {
-        name: "categories.lvl2",
-        type: "string[]",
-        facet: true,
-        optional: true
-      },
-      {
-        name: "categories.lvl3",
-        type: "string[]",
-        facet: true,
-        optional: true
-      },
-      {
-        name: "price",
-        type: "float",
-        facet: true
-      },
-      {
-        name: "image",
-        type: "string",
-        facet: false
-      },
-      {
-        name: "popularity",
-        type: "int32",
-        facet: false
-      },
-      {
-        name: "free_shipping",
-        type: "bool",
-        facet: true
-      },
-      {
-        name: "rating",
-        type: "int32",
-        facet: true
+  const schema ={
+        "name": "test",  // The name of your Typesense collection
+    num_documents:0,
+    enable_nested_fields:true,
+        "fields": [
+          { "name": "Item", "type": "string" },
+          { "name": "ID", "type": "int32"},
+          { "name": "Name", "type": "string" },
+          { "name": "Type", "type": "string" },
+          { "name": "SKU", "type": "string" },
+          { "name": "Options", "type": "string" },
+          { "name": "Inventory Tracking", "type": "string" },
+          { "name": "Current Stock", "type": "int32" },
+          { "name": "Low Stock", "type": "int32" },
+          { "name": "Price", "type": "float" },
+          { "name": "Cost Price", "type": "int32" },
+          { "name": "Retail Price", "type": "int32" },
+          { "name": "Sale Price", "type": "int32",optional:true },
+          { "name": "Brand ID", "type": "int32" },
+          { "name": "Channels", "type": "int32" },
+          { "name": "Categories", "type": "string" },
+          { "name": "Description", "type": "string" },
+          { "name": "Custom Fields", "type": "string" },
+          { "name": "Page Title", "type": "string" },
+          { "name": "Product URL", "type": "string" },
+          { "name": "Meta Description", "type": "string" },
+          { "name": "Search Keywords", "type": "string" },
+          { "name": "Meta Keywords", "type": "string" },
+          { "name": "Bin Picking Number", "type": "int32" },
+          { "name": "UPC", "type": "object","properties": {
+              "EAN": {"type": "string", "optional": true}
+              // Add other properties of the UPC object if needed
+            } },
+          { "name": "Global Trade Number", "type": "string" },
+          { "name": "Manufacturer Part Number", "type": "string" },
+          { "name": "Free Shipping", "type": "bool" },
+          { "name": "Fixed Shipping Cost", "type": "int32" },
+          { "name": "Weight", "type": "int32" },
+          { "name": "Width", "type": "int32" },
+          { "name": "Height", "type": "int32" },
+          { "name": "Depth", "type": "int32" },
+          { "name": "Is Visible", "type": "bool" },
+          { "name": "Is Featured", "type": "bool" },
+          { "name": "Warranty", "type": "string" },
+          { "name": "Tax Class", "type": "int32" },
+          { "name": "Product Condition", "type": "string" },
+          { "name": "Show Product Condition", "type": "bool" },
+          { "name": "Sort Order", "type": "int32" },
+          { "name": "Variant Image URL", "type": "string" },
+          { "name": "Internal Image URL (Export)", "type": "string" },
+          { "name": "Image URL (Import)", "type": "string" },
+          { "name": "Image Description", "type": "string" },
+          { "name": "Image is Thumbnail", "type": "bool" },
+          { "name": "Image Sort Order", "type": "int32" },
+          { "name": "YouTube ID", "type": "string" },
+          { "name": "Video Title", "type": "string" },
+          { "name": "Video Description", "type": "string" },
+          { "name": "Video Sort Order", "type": "string" }
+        ]
       }
-    ],
-    default_sorting_field: "popularity"
-  };
+  ;
 
   console.log("Populating index in Typesense");
 
@@ -100,12 +86,15 @@ module.exports = (async () => {
   let reindexNeeded = false;
 
   try {
-    const collection = await typesense.collections("products").retrieve();
+    const collection = await typesense.collections("test").retrieve();
     console.log('Collection retrieved:', collection);
     console.log("Deleting existing schema");
-    await typesense.collections("products").delete();
+    await typesense.collections("test").delete();
+    console.log('deleted');
+
+    await typesense.collections().create(schema);
   } catch (error) {
-    // debugger
+    debugger
     if (error.name && error.httpStatus === 404) {
       // debugger
       console.error('Collection not found. You can create it here.');
@@ -114,7 +103,7 @@ module.exports = (async () => {
       console.log("Creating schema: ");
       await typesense.collections().create(schema);
       const collectionRetrieved = await typesense
-          .collections("products")
+          .collections("test")
           .retrieve();
       console.log("Retrieving created schema: ");
     } else {
@@ -125,23 +114,23 @@ module.exports = (async () => {
 
 
 
-  console.log("Adding records: ",);
+  console.log("Adding records: ");
 
   // Bulk Import
   products.forEach(product => {
-    product.free_shipping = product.name.length % 2 === 1; // We need this to be deterministic for tests
-    product.rating = (product.description.length % 5) + 1; // We need this to be deterministic for tests
-    product.categories.forEach((category, index) => {
-      product[`categories.lvl${index}`] = [
-        product.categories.slice(0, index + 1).join(" > ")
-      ];
-    });
+    product.free_shipping = product.Name.length % 2 === 1; // We need this to be deterministic for tests
+    product.rating = (product.Description.length % 5) + 1; // We need this to be deterministic for tests
+    // product.categories.forEach((category, index) => {
+    //   product[`categories.lvl${index}`] = [
+    //     product.categories.slice(0, index + 1).join(" > ")
+    //   ];
+    // });
   });
 
 
   try {
     const returnData = await typesense
-      .collections("products")
+      .collections("test")
       .documents()
       .import(products);
     console.log({returnData});
@@ -155,6 +144,7 @@ module.exports = (async () => {
     }
     return returnData;
   } catch (error) {
+    console.log(error.importResults)
     console.log(error);
   }
 })();

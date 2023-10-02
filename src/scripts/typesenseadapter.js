@@ -20,7 +20,7 @@ export let TYPESENSE_SERVER_CONFIG = {
       // The following parameters are directly passed to Typesense's search API endpoint.
       //  So you can pass any parameters supported by the search endpoint below.
       //  queryBy is required.
-      queryBy: 'name',
+      queryBy: 'Name',
       typoTokensThreshold: 1,
       // groupBy: "categories",
       // groupLimit: 1

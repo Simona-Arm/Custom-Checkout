@@ -4,14 +4,11 @@ const Hit = () => {
     const hits = useHits()
     console.log(hits)
     return <div>
-        {hits.results.hits.map(({brand,name,image,popularity})=>{
-            return <div key={popularity}>
+        {hits.results.hits.map(({Price,Name,popularity},index)=>{
+            return <div key={index}>
                 <div>
-                    <p>Name: {name}</p>
-                    <p>Brand: {brand}</p>
-                </div>
-                <div>
-                    <img src={image}/>
+                    <p><b>Name:</b> {Name}</p>
+                    <p><b>Price:</b> {Price}</p>
                 </div>
             </div>
         })}

@@ -32,9 +32,8 @@ function App() {
 
 
   return (
-
     <div className="App">
-      <InstantSearch searchClient={typesenseInstantsearchAdapter.searchClient} indexName="products">
+      <InstantSearch searchClient={typesenseInstantsearchAdapter.searchClient} indexName="test">
           <header className="header">
               <div>
                   <SearchIcon />
